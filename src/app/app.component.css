@@ -1,0 +1,10 @@
+/* .body {
+    height: calc(100vh - 10vh);
+    margin: 0;
+} */
+
+.full-height {
+    height: fit-content;
+    /* Full viewport height */
+}
+

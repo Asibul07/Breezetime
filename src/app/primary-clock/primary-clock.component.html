@@ -1,0 +1,130 @@
+<div class="container mt-5">
+  <!-- Loading state -->
+  <div *ngIf="isLoading">
+    <p>Loading weather data...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="errorMessage">
+    <p class="text-danger">{{ errorMessage }}</p>
+  </div>
+
+  <!-- Weather data -->
+  <div *ngIf="weatherData && !isLoading && !errorMessage">
+    <p>
+      {{ weatherData.location.name }},
+      {{ weatherData.location.country }}
+    </p>
+
+    <!-- Current Time -->
+    <h1 class="display-1">{{ currentTime }}</h1>
+
+    <p>
+      Temperature is <strong>{{ weatherData?.current?.temp_c }} °C </strong> and
+      the Weather is
+      <strong
+        >{{ weatherData?.current?.condition.text }}
+
+        <img
+          *ngIf="weatherData?.current?.condition.icon"
+          [src]="weatherData.current.condition.icon"
+          alt="Weather Icon"
+          class="weather-icon-img"
+        />
+      </strong>
+
+      — Whatever the weather brings, remember: it's a great day for coding... or
+      a quick nap. Who says you can't do both?
+    </p>
+    <!-- <div class="weather-icon">
+      <img
+        *ngIf="weatherData?.current?.condition.icon"
+        [src]="weatherData.current.condition.icon"
+        alt="Weather Icon"
+        class="weather-icon-img"
+      />
+    </div> -->
+    <!-- Uncomment if needed -->
+    <!-- <p><strong>Last Updated:</strong> {{ weatherData?.current?.last_updated }}</p> -->
+  </div>
+
+  <!-- Edit button to open modal -->
+  <button class="btn btn-primary" (click)="openEditModal(content)">
+    Edit Location
+  </button>
+
+  <!-- Button to open alarm modal -->
+  <!-- <button class="btn btn-warning" (click)="openEditModal(alarmContent)">
+    Set Alarm
+  </button> -->
+
+  <!-- Popup Modal for editing location -->
+  <ng-template #content let-modal>
+    <div class="modal-header border-0 d-flex justify-content-between">
+      <h5 class="modal-title">Change Location</h5>
+      <button
+        type="button"
+        class="btn close ml-auto"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="location">Select a Location:</label>
+        <select
+          id="location"
+          class="form-control"
+          (change)="updateLocation($event)"
+        >
+          <option value="" disabled selected>Select your location</option>
+          <option *ngFor="let loc of locations" [value]="loc.name">
+            {{ loc.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer border-0">
+      <button type="button" class="btn btn-primary" (click)="modal.close()">
+        Save changes
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="modal.close()"
+      >
+        Close
+      </button>
+    </div>
+  </ng-template>
+
+  <!-- Alarm modal template -->
+  <!-- <ng-template #alarmContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Set Alarm</h4>
+      <button type="button" class="close" (click)="modal.dismiss()">
+        &times;
+      </button>
+    </div>
+    <div class="modal-body">
+      <label for="alarmTime">Select Alarm Time:</label>
+      <input type="time" [(ngModel)]="alarmTime" id="alarmTime" />
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="setAlarm(modal)">
+        Set Alarm
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">
+        Cancel
+      </button>
+    </div>
+  </ng-template> -->
+
+  <!-- Display alarm message -->
+  <!-- <div *ngIf="alarmMessage" class="alert alert-info mt-3">
+    {{ alarmMessage }}
+  </div>
+</div> 
+</div> -->
+</div>

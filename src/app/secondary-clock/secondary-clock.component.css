@@ -1,0 +1,35 @@
+/* secondary-clock.component.css */
+.card {
+    border: 1px solid #007bff;
+    background-color: transparent;
+}
+
+/* Hide the button-container by default */
+.button-container {
+    display: none;
+    position: absolute;
+    /* Position it relative to the card */
+    top: 10px;
+    /* Adjust positioning as needed */
+    right: 10px;
+    /* Adjust positioning as needed */
+}
+
+/* Show button-container when hovering over the card */
+.card-hover:hover .button-container {
+    display: flex;
+    gap: 5px;
+    /* Space between buttons */
+}
+
+/* Style the card */
+.card-hover {
+    position: relative;
+    /* Make it relative for positioning the buttons */
+    transition: box-shadow 0.3s ease;
+}
+
+/* Add a shadow effect on hover for a better UI */
+.card-hover:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,104 @@
+<div class="row">
+  <!-- Display first 4 cards -->
+  <div
+    class="col-md-6"
+    *ngFor="let card of clockCards.slice(0, 4); let i = index"
+  >
+    <div class="card mb-3 card-hover">
+      <div class="card-body">
+        <div class="button-container">
+          <button class="btn" (click)="openEditModal(modalContent, card)">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button class="btn" (click)="deleteCard(i)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+        <p class="card-title">{{ card.location }}</p>
+        <h4 class="card-text">{{ card.currentTime }}</h4>
+        <p class="card-text">
+          Weather is {{ card.weatherData?.current?.condition.text }} and the
+          Temperature is {{ card.weatherData?.current?.temp_c }} °C
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Card Button -->
+<button class="btn btn-primary" (click)="addCard(modalContent)">
+  Add Card
+</button>
+
+<!-- Table for additional cards -->
+<div *ngIf="clockCards.length > 4">
+  <h4 class="text-center mt-2">Additional Location Data</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Location</th>
+        <th>Current Time</th>
+        <th>Weather</th>
+        <th>Temperature (°C)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let card of clockCards.slice(4); let i = index">
+        <td>{{ card.location }}</td>
+        <td>{{ card.currentTime }}</td>
+        <td>{{ card.weatherData?.current?.condition.text }}</td>
+        <td>{{ card.weatherData?.current?.temp_c }}</td>
+        <td>
+          <button class="btn" (click)="openEditModal(modalContent, card)">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <button class="btn" (click)="deleteCard(i + 4)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #modalContent let-modal>
+  <div class="modal-header border-0 d-flex justify-content-between">
+    <h4 class="modal-title">Edit Location</h4>
+    <button
+      type="button"
+      class="btn close ml-auto"
+      aria-label="Close"
+      (click)="modal.dismiss('Close click')"
+    >
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="location">Select a Location:</label>
+      <select
+        id="location"
+        class="form-control"
+        [(ngModel)]="selectedCard.location"
+      >
+        <option value="" disabled selected>Select your location</option>
+        <option *ngFor="let loc of locations" [value]="loc.name">
+          {{ loc.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer border-0">
+    <button type="button" class="btn btn-primary" (click)="modal.close('save')">
+      Save
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="modal.dismiss('cancel')"
+    >
+      Cancel
+    </button>
+  </div>
+</ng-template>
