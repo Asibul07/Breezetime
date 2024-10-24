@@ -3,6 +3,9 @@
     border: 1px solid #007bff;
     background-color: transparent;
 }
+.display-1{
+    font-weight: 600;
+}
 
 .button-container {
     display: none;
@@ -10,10 +13,13 @@
     top: 10px;
     right: 10px;
 }
+.card-hover .card-body .button-container .btn {
+    display: none;
+    /* Hide the button container by default */
+}
 
-.card-hover:hover .button-container {
-    display: flex;
-    gap: 5px;
+.card-hover:hover .card-body .button-container .btn {
+    display: block;
 }
 
 .card-hover {
@@ -23,4 +29,19 @@
 
 .card-hover:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h4{
+    font-weight: bold;
+}
+
+/* < !-- HTML !--><button class="button-66" role="button">Button 66</button> */
+
+/* CSS */
+.btn {
+    transition: all .2s cubic-bezier(.22, .61, .36, 1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
 }

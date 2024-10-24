@@ -19,13 +19,13 @@ interface ClockCard {
 export class SecondaryClockComponent implements OnInit, OnDestroy {
   public clockCards: ClockCard[] = [
     {
-      location: 'Dhaka',
+      location: 'United States',
       weatherData: null,
       currentTime: '',
       localTimeOffset: 0,
     },
     {
-      location: 'London',
+      location: 'Bangladesh',
       weatherData: null,
       currentTime: '',
       localTimeOffset: 0,
@@ -37,7 +37,13 @@ export class SecondaryClockComponent implements OnInit, OnDestroy {
       localTimeOffset: 0,
     },
     {
-      location: 'India',
+      location: 'London',
+      weatherData: null,
+      currentTime: '',
+      localTimeOffset: 0,
+    },
+    {
+      location: 'Australia',
       weatherData: null,
       currentTime: '',
       localTimeOffset: 0,
@@ -244,8 +250,6 @@ export class SecondaryClockComponent implements OnInit, OnDestroy {
     { id: 193, name: 'Yemen' },
     { id: 194, name: 'Zambia' },
     { id: 195, name: 'Zimbabwe' },
-
-    // Additional regions and territories
     { id: 196, name: 'Greenland' },
     { id: 197, name: 'Puerto Rico' },
     { id: 198, name: 'Guam' },
@@ -265,6 +269,8 @@ export class SecondaryClockComponent implements OnInit, OnDestroy {
     { id: 212, name: 'Jersey' },
     { id: 213, name: 'Guernsey' },
   ];
+  isLoading: any;
+  errorMessage: any;
 
   constructor(
     private weatherService: WeatherService,
@@ -347,7 +353,6 @@ export class SecondaryClockComponent implements OnInit, OnDestroy {
       ); // Alert user
       return;
     }
-
     card.location = this.selectedCard.location; // Update location
     this.fetchWeather(card); // Fetch updated weather data
     this.saveClockCards();
@@ -367,12 +372,12 @@ export class SecondaryClockComponent implements OnInit, OnDestroy {
     const newCard: ClockCard = {
       location: '', // Default or initial location
       weatherData: null, // Placeholder for weather data
-      currentTime: '', // Current time placeholder
+      currentTime: '0', // Current time placeholder
       localTimeOffset: 0, // Local time offset, if needed
     };
-
     this.clockCards.push(newCard); // Add the new card
     this.openEditModal(content, newCard); // Open modal for editing the new card
+    this.saveClockCards();
   }
 
   deleteCard(index: number): void {

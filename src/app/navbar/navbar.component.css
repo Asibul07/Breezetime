@@ -1,17 +1,24 @@
 .navbar{
-    height: 10vh;
+    height: 15vh;
 }
-.navbar-brand {
-    font-size: 1.5rem;
+.title > .navbar-brand {
+    font-size: 2.5rem;
     font-weight: 700;
     color: #2c3e50;
     text-transform: uppercase;
-    letter-spacing: 0.1rem;
-    padding: 15px 20px;
+    letter-spacing: 0.3rem;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 /* Hover effect */
-.navbar-brand:hover {
+.title > .navbar-brand:hover {
     transform: scale(1.05);
 }
+
+ul a i {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+

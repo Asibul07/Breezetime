@@ -330,15 +330,21 @@ export class PrimaryClockComponent implements OnInit, OnDestroy {
     this.saveLocationToLocalStorage();
   }
 
-  private saveLocationToLocalStorage(): void {
+private saveLocationToLocalStorage(): void {
+  if (isPlatformBrowser(this.platformId)) {
     localStorage.setItem('location', this.location);
   }
+}
 
-  private loadLocationFromLocalStorage(): void {
+private loadLocationFromLocalStorage(): void {
+  if (isPlatformBrowser(this.platformId)) {
     const savedLocation = localStorage.getItem('location');
     if (savedLocation) {
       this.location = savedLocation;
     }
+  }
+}
+
   }
 
   // setAlarm(modal: any): void {
@@ -378,4 +384,4 @@ export class PrimaryClockComponent implements OnInit, OnDestroy {
   //     alert('Please set a valid alarm time.');
   //   }
   // }
-}
+
